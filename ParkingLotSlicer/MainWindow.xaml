@@ -1,0 +1,54 @@
+﻿<Window x:Class="ParkingLotSlicer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParkingLotSlicer"
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <StackPanel Background="White"  Orientation="Horizontal" VerticalAlignment="Top">
+            <Button Click="Button_Click"  Content="Select Image"/>
+            <TextBlock Name="MousePositionTextBlock" Margin="20,0"/>
+            <Button Click="Button_Click_1" Content="Reset Zoom"/>
+            <Button Click="Button_Click_2"  Content="Select Spot">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelectingPoint}" Value="true">
+                                <Setter Property="Background" Value="Green"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Click="Button_Click_4">Export to CSV</Button>
+
+        </StackPanel>
+        <Image Panel.ZIndex="-1" Name="DisplayImage" MouseWheel="Image_MouseWheel" MouseMove="DisplayImage_MouseMove" 
+               Margin="30,30,130,30" MouseDown="DisplayImage_MouseDown" Stretch="None"/>
+        <Grid HorizontalAlignment="Right">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center">Areas</TextBlock>
+                <ListBox ItemsSource="{Binding ParkingAreasCollection}" SelectedItem="{Binding SelectedParkingArea}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <Button Content="Remove" Click="Button_Click_3"/>
+                                    <Button Content="Highlight" Click="Button_Click_5"/>
+                                    <CheckBox Content="Unavailable" IsChecked="{Binding Unavailable}" Checked="CheckBox_Checked"/>
+                                </StackPanel>
+                                <TextBlock Grid.Column="1" Margin="2,0,0,0" Text="{Binding Name}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
