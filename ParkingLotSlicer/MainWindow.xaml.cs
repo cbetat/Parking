@@ -320,7 +320,7 @@ namespace ParkingLotSlicer
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            ParkingArea areaToHighlight = (ParkingArea)((Button)sender).DataContext;
+            ParkingArea areaToHighlight = (ParkingArea)((CheckBox)sender).DataContext;
 
             if (areaToHighlight.Unavailable)
                 DrawAreaOnBitmap(areaToHighlight, Pens.Yellow);
@@ -384,6 +384,18 @@ namespace ParkingLotSlicer
             }
         }
 
+        private int _spotNumber;
+
+        public int SpotNumber
+        {
+            get { return _spotNumber; }
+            set
+            {
+                _spotNumber = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged([CallerMemberName] String propertyName = "")
@@ -410,7 +422,7 @@ namespace ParkingLotSlicer
 
         public override string ToString()
         {
-            return $"{Math.Round(X, 2)}, {Math.Round(Y, 2)}";
+            return $"{Math.Round(X)}, {Math.Round(Y)}";
         }
 
         private double _x;

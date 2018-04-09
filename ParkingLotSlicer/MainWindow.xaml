@@ -25,30 +25,34 @@
             <Button Click="Button_Click_4">Export to CSV</Button>
 
         </StackPanel>
-        <Image Panel.ZIndex="-1" Name="DisplayImage" MouseWheel="Image_MouseWheel" MouseMove="DisplayImage_MouseMove" 
-               Margin="30,30,130,30" MouseDown="DisplayImage_MouseDown" Stretch="None"/>
+        <Viewbox Margin="30,30,130,30" Panel.ZIndex="-1">
+            <Image  Name="DisplayImage" MouseWheel="Image_MouseWheel" MouseMove="DisplayImage_MouseMove" 
+                MouseDown="DisplayImage_MouseDown" Stretch="None"/>
+        </Viewbox>
         <Grid HorizontalAlignment="Right">
-            <StackPanel>
-                <TextBlock HorizontalAlignment="Center">Areas</TextBlock>
-                <ListBox ItemsSource="{Binding ParkingAreasCollection}" SelectedItem="{Binding SelectedParkingArea}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel>
-                                    <Button Content="Remove" Click="Button_Click_3"/>
-                                    <Button Content="Highlight" Click="Button_Click_5"/>
+                <Expander Header="Areas" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <ListBox ItemsSource="{Binding ParkingAreasCollection}"
+                             SelectedItem="{Binding SelectedParkingArea}"
+                             MaxHeight="500">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <Button Content="Remove" Click="Button_Click_3"/>
+                                        <Button Content="Highlight" Click="Button_Click_5"/>
                                     <CheckBox Content="Unavailable" IsChecked="{Binding Unavailable}" Checked="CheckBox_Checked"/>
-                                </StackPanel>
-                                <TextBlock Grid.Column="1" Margin="2,0,0,0" Text="{Binding Name}" />
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
+                                    <TextBox Text="{Binding SpotNumber}" Width="25" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Margin="2,0,0,0" Text="{Binding Name}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Expander>
         </Grid>
     </Grid>
 </Window>

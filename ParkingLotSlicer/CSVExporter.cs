@@ -31,10 +31,9 @@ namespace ParkingLotSlicer
                 return;
 
             string csv = "";
-            int count = 0;
             foreach (var area in areas)
             {
-                csv += count++ + ", " + area.StartingPoint.ToString() + ", " + area.EndingPoint.ToString() + "," + (area.Unavailable ? "Unavailable" : "") + "\n";
+                csv += area.SpotNumber + ", " + area.StartingPoint.ToString() + ", " + area.EndingPoint.ToString() + "," + (area.Unavailable ? "Unavailable" : "") + "\n";
             }
             SaveStringToDisk(csv, fd.FileName + ".csv");
         }
